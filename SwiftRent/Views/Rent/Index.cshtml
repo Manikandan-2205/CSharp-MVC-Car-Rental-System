@@ -1,0 +1,108 @@
+﻿@model IEnumerable<SwiftRent.Models.RentalViewModel>
+@{
+    ViewBag.Title = "Index";
+}
+<link href="~/Content/Rental_index.css" rel="stylesheet" />
+<body @*style="background-image:url('/Content/image/Rental_fom_Background.jpg');background-repeat:no-repeat;background-size:cover;background-attachment:fixed;*@">
+    <div class="container" id="container">
+        <div class="row">
+            <div class="col-sm-4 form-container">
+                @using (Html.BeginForm("Save", "rent", FormMethod.Post, new { id = "popupForm" }))
+                {
+                    <h1>Car Rental</h1>
+                    <div class="form-group">
+                        <label class="form-label">Car No</label>
+                        <select class="form-control" id="CarId" name="CarId" required>
+                            <option>Please Select</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Customer ID</label>
+                        <input type="text" id="CustId" name="CustId" class="form-control" placeholder="Customer Id" required />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Customer Name</label>
+                        <input type="text" id="CustName" name="CustName" class="form-control" placeholder="Customer Name" required />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Rental Fee</label>
+                        <input type="text" id="Fee" name="Fee" class="form-control" placeholder="Rental Fee" required />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Start Date</label>
+                        <input type="datetime-local" id="StartDate" name="StartDate" class="form-control" placeholder="Start Date" required />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">End Date</label>
+                        <input type="datetime-local" id="EndDate" name="EndDate" class="form-control" placeholder="End Date" required />
+                    </div>
+                    <div class="form-group">
+                        <input type="button" id="Save" value="Save" class="btn btn-success" />
+                        <input type="reset" id="Reset" value="Reset" class="btn btn-info" />
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</body>
+@section script{
+<script src="~/Scripts/bootstrap.js"></script>
+    
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script >
+    $(document).ready(function () {
+        // Get Car Number in Selection Bar
+        getCarNo();
+
+        // Function to get car numbers and append options to the select element
+        function getCarNo() {
+            $.ajax({
+                type: 'GET',
+                url: '/Rentify/GetCarNo',
+                dataType: 'JSON',
+                success: function (data) {
+                    console.log("data received:", data);
+                    for (var i = 0; i < data.length; i++) {
+                        $("#CarNo").append($("<option/>", {
+                            text: data[i].CarNo,
+                            value: data[i].CarNo
+                        }));
+                    }
+                }
+            });
+        }
+
+        $("#CarNo").change(function () {
+            var selectedCarNo = $(this).val();
+            getFees(selectedCarNo);
+        });
+
+        function getFees(carNo) {
+            $.ajax({
+                type: 'GET',
+                url: '/Rentify/GetFees?carNo=' + carNo,
+                dataType: 'JSON',
+                success: function (fees) {
+                    console.log("fees received:", fees);
+                    $("#fees").val(fees);
+                    calculateTotalAmount();
+                }
+            });
+        }
+
+        function calculateTotalAmount() {
+            var fees = parseFloat($("#fees").val());
+            var startDate = new Date($("#StartDate").val());
+            var endDate = new Date($("#EndDate").val());
+            var daysDifference = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
+            var totalAmount = fees * daysDifference;
+            $("#TotalAmount").val(totalAmount.toFixed(2));
+        }
+
+        $("#StartDate, #EndDate").change(function () {
+            calculateTotalAmount();
+        });
+    });
+
+    </script>
+   }

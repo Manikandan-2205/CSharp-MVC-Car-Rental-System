@@ -1,0 +1,52 @@
+﻿body {
+        background-image: url('/Content/image/Return_car_Background.jpg'); /* Add your background image path */
+        background-size: cover;
+        background-repeat: no-repeat;
+        color: #fff;
+        padding-bottom: 50px; /* Added to provide space for the bottom description */
+    }
+
+    .car-item {
+        background-color: rgba(40, 39, 39, 0.68);
+        padding: 10px;
+        margin-top: 20px;
+        border-radius: 10px;
+        transition: ease-in  ease-in-out;
+        box-shadow: 0 4px 8px rgb(0, 0, 0);
+    }
+
+        .car-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 16px rgb(251, 247, 46);
+        }
+
+        .car-item img {
+            height: 200px;
+            width: 100%;
+            border-radius: 10px;
+            object-fit: cover;
+            margin-bottom: 10px;
+            
+        }
+
+        .car-item h2 {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .car-item p {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+    .card-body {
+        padding: 10px;
+        background-color: rgba(90, 88, 88, 0.27);
+        border-radius: 0 0 10px 10px;
+    }
+
+    .btn-primary {
+        border-radius: 20px;
+        padding: 8px 15px;
+        font-size: 14px;
+    }

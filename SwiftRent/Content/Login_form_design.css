@@ -1,0 +1,49 @@
+﻿body {
+    background-image: url("image/car_background_2.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.pt-5 {
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/*.global-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;*/
+}
+
+.card {
+    border-radius: 50px;
+    background-color: lightgray;
+}
+.login-form {
+            border-radius: 50px;
+            width: 100%;  /* Adjust the width as needed */
+            max-width: 400px; /* Set a maximum width if necessary */
+            margin: 0.5% 20%; /* Center the form horizontally */
+            background-color: lightgray;
+        }
+
+.card-body {
+    margin-left:10px;
+    margin:30px;
+    padding: 30px; /* Adjust as needed */
+}
+
+.btn {
+    width: 100%; /* Make the button full-width */
+}
+
+.footer {
+    text-align: center;
+    padding: 20px;
+    background-color: lightgray;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}

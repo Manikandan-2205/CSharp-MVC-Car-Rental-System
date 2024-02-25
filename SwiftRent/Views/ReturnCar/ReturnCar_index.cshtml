@@ -1,0 +1,85 @@
+﻿@model IEnumerable<SwiftRent.Models.ReturnCarViewModel>
+@{
+    ViewBag.Title = "ReturnCar";
+}
+<div class="page-specific-style">
+    <div class="row">
+        <div class="col-sm-4">
+            @using (Html.BeginForm("Save", "Returned", FormMethod.Post, new { id = "popupForm" }))
+            {
+                <div class="container">
+                    <h1>Car Rental</h1>
+                    <div class="form-group">
+                        <label class="form-label">Car No</label>
+                        <select class="form-control" id="CarNo" name="CarNo" placeholder="CarNO" required>
+                            <option>Please Select</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Customer ID</label>
+                        <input type="text" id="CustId" name="CustId" class="form-control" placeholder="Customer Id" required />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Return Date and Time</label>
+                        <input type="datetime-local" id="ReturnDate" name="ReturnDate" class="form-control" placeholder="Return Date and Time" required />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Rental Duration</label>
+                        <input type="text" id="Elsp" name="Elsp" class="form-control" placeholder="Total Day of Expired" required />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Fine</label>
+                        <input type="number" id="Fine" name="Fine" class="form-control" placeholder="Fine Amount" required />
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <input type="submit" id="Save" value="Save" class="btn btn-success" />
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <input type="reset" id="Reset" value="Reset" class="btn btn-info" />
+                    </div>
+                </div>
+            }
+
+        </div>
+        <div class="container">
+            <div class="col-sm-8">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Car No</th>
+                            <th>End Date</th>
+                            <th>Return Date</th>
+                            <th>Expired Days</th>
+                            <th>Fine</th>
+                            <th>Available</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+            {
+                            <tr>
+                                <td>@item.CarNo</td>
+                                <td>@item.EndDate</td>
+                                <td>@item.ReturnDate</td>
+                                <td>@item.Elsp</td>
+                                <td>@item.Fine</td>
+                                <td>@item.Available</td>
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <!-- Include your script references here -->
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/jquery-ui-1.11.4/jquery-ui.js"></script> <!-- Include jQuery UI for datepicker -->
+    <script src="~/Scripts/Return_Car_Script.js"></script>
+}

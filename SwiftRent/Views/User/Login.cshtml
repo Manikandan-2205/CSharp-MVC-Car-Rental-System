@@ -1,0 +1,69 @@
+﻿@model SwiftRent.Models.UserDetail
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <link href="~/Content/Login_form_design.css" rel="stylesheet" />
+    <script>
+        function myFunction() {
+            var x = document.getElementById("password_input");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+    </script>
+}
+
+<body>
+
+    <div class="pt-5">
+        <div class="global-container col-md-12">
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+            <div class="card login-form">
+                <div class="card-body ">
+                    <h3 class="card-title text-center"> <img src="~/Content/image/user (1).png" height="20%" width="20%"> </h3>
+                    <div class="card-text">
+                      
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control form-control-sm", id = "user_input" } })
+                            @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control form-control-sm", id = "password_input" } })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        </div>
+                        @if (ViewBag.Message != null)
+                        {
+                            <div class="form-group text-danger">@ViewBag.Message</div>
+                        }
+                        <div class="form-group">
+                            <input id="check3" name="check3" type="checkbox" value="show password" onclick="myFunction()">
+                            <label class="check" for="check3">Show password</label>
+                        </div>                        
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Login" class="btn btn-primary" />
+                            </div>                       
+                        @*<button type="submit" class="btn btn-primary ">Sign in</button>*@
+                        <div class="sign-up">
+                            Don't have an account? @Html.ActionLink("Create One", "Register")
+                        </div>
+                    </div>
+                </div>
+            </div>
+}
+        </div>
+    </div>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+</body>

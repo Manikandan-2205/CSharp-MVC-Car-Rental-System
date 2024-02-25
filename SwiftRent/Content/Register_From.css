@@ -1,0 +1,62 @@
+﻿body{
+    background-image: url('/Content/image/Rental_car_background.jpg'); /* Adjust the URL to your image */
+    background-size: cover;      
+}
+
+.background-image{
+    background-attachment:fixed;
+    opacity:0.7;
+    background-repeat:no-repeat; 
+    height: 100%;
+}
+.registration-form {
+    background-color: rgba(255, 255, 255, 0.9); /* Adjust the opacity as needed */
+    padding: 20px;
+    border-radius: 10px;
+    margin: 50px auto; /* Adjust the margin as needed */
+    width: 400px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Add shadow for better visibility */
+}
+
+.registration-form h4 {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.registration-form .form-group {
+    margin-bottom: 25px;
+}
+
+.registration-form label {
+    font-weight: bold;
+}
+
+.registration-form input[type="text"],
+.registration-form input[type="password"],
+.registration-form select {
+    width: calc(100% - 22px); /* Adjust the width to account for padding and borders */
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+}
+
+.registration-form input[type="submit"] {
+    width: 100%;
+    padding: 20px;
+    border: none;
+    border-radius: 15px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+.registration-form input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Adjustments for smaller screens */
+@media (max-width: 480px) {
+    .registration-form {
+        width: 90%;
+    }
+}

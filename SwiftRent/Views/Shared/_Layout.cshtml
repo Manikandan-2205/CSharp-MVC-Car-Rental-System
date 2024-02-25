@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SwiftRent</title>
+    @Styles.Render("~/Content/css")    
+    <link href="~/Content/Layout.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="~/Content/image/logo.png" />
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="@Url.Action("Index", "Home")">
+                    <img src="~/Content/image/logo.png" alt="Logo" />
+                </a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            @Html.ActionLink("Car", "Index", "Car")
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Car", "Login", "User")
+                        }
+                    </li>
+                    <li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            @Html.ActionLink("Customer", "Index", "Customer")
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Customer", "Login", "User")
+                        }
+                    </li>
+                    <li>@Html.ActionLink("Rental", "Index", "Rent")</li>
+                    <li>@Html.ActionLink("Return", "ReturnCar_index", "ReturnCar")</li>
+                    <li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            @Html.ActionLink("Report", "Index", "Report")
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Report", "Login", "User")
+                        }
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>@Html.ActionLink("Register", "Register", "User")</li>
+                    @if (User.Identity.IsAuthenticated == false)
+                    {
+                        <li>@Html.ActionLink("Login", "Login", "User")</li>
+                    }
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>
+                            @Html.ActionLink("Logoff", "Signout", "User")
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div style="margin-left: 20px; margin-right: 20px; position: relative; min-height: 100vh;">
+        @RenderBody()
+        <footer style="position: absolute; bottom: 0; width: 100%;">
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

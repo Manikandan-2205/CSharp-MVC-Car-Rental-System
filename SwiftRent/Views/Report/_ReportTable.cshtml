@@ -1,0 +1,13 @@
+﻿@model List<SwiftRent.Models.RentalReportViewModel>
+@foreach (var item in Model)
+{
+    <tr>
+        <td>@item.CustomerName</td>
+        <td>@item.StartDate</td>
+        <td>@item.EndDate</td>
+        <td>@item.ReturnDate</td>
+        <td>@item.ExpiredDays</td>
+        <td>@item.Fee</td>
+        <td>@item.Fine</td>
+    </tr>
+}

@@ -1,0 +1,43 @@
+﻿@model List<SwiftRent.Models.RentalReportViewModel>
+@{
+    ViewBag.Title = "Rental Report";
+}
+<h2>Rental Report</h2>
+@using (Html.BeginForm("Report", "Report", FormMethod.Get))
+{
+    @Html.DropDownList("CarNo", ViewBag.CarNumbers as SelectList, "Select Car Number", new { onchange = "getReport()" })
+}
+<table id="reportTable" class="table">
+    <thead>
+        <tr>
+            <th>Customer Name</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Return Date</th>
+            <th>Expired Days</th>
+            <th>Fee</th>
+            <th>Fine</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Report data will be populated here -->
+    </tbody>
+</table>
+@section scripts {
+    <script>
+        function getReport() {
+            var carNo = $("#CarNo").val();
+            $.ajax({
+                url: '@Url.Action("GetReportByCarNo", "Report")',
+                type: 'GET',
+                data: { carNo: carNo },
+                dataType: 'html',
+                success: function (result) {
+                    $('#reportTable tbody').html(result);
+                }
+            });
+        }
+    </script>
+}
+
+
